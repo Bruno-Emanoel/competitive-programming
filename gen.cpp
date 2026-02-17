@@ -11,9 +11,8 @@ using namespace std;
 string random_string(int n){
     string res = "";
     res.reserve(n+1);
-    char cc[]={'.','.','K'};
     for(int i = 0; i < n; ++i){
-        res.push_back(cc[random(0, 2)]);
+        res.push_back('a'+random(0,26));
     }
     return res;
 }
@@ -21,8 +20,10 @@ string random_string(int n){
 int main(){
     // freopen("in.txt", "w", stdout);
     int t = 1;
-    ll n = random(5,6);
+    ll n = random(5,10);
+    cout << t << ' ' << n;
     loop(i,0,n)
-        cout << random_string(n)<<endl;
+        cout << random(1,20) << ' ';
+    cout << '\n';
 
 }

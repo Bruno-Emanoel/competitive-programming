@@ -90,21 +90,6 @@ void print(const vpll &vec) {
 }
 
 // CODE BELOW HERE
- 
-constexpr ll MAXN = 2e5;
-vpll t[MAXN];
-
-struct cmp{
-  bool operator()(pll &a, pll &b) {return a.second>b.second;}
-};
-
-struct mng {
-  ll n; mng(ll n):n{n}{}
-  ~mng(){
-    loop(i,0,n)
-      t[i].clear();
-  }
-};
 
 void solve() {
 }
@@ -117,5 +102,3 @@ int main(){
     solve();
   return 0;
 }
-
-// 1 8 40

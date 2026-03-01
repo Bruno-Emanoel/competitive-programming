@@ -24,9 +24,8 @@ inline ll binexpo(ll a, ll e) {
   a %=mod;
   e %=mod-1;
   while(e) {
-    if(e&1) {
+    if(e&1)
       ans =(ans*a)%mod;
-    }
     a = (a*a)%mod;
     e>>=1;
   }
@@ -124,7 +123,7 @@ struct Mint {
   ll x=0;
   Mint() = default;
   Mint(ll a): x{((a%mod)+mod)%mod} {}
-  Mint(ll p, ll q): x{(((p%mod)+mod)%mod)*binexpo(q,mod-2)} {}
+  Mint(ll p, ll q): Mint((((p%mod)+mod)%mod)*binexpo(q,mod-2)) {}
   Mint operator+(const Mint &a) const { return (x+a.x); }
   Mint operator-() const { return (mod-x); }
   Mint operator-(const Mint &a) const { return operator+(-a); }

@@ -16,8 +16,10 @@ vector<vector<int>> randGraph(int n, double chance) {
 
   for(int i = 0; i < n; ++i) {
     for(int j = i+1; j<n; ++j) {
-      if(genReal()<=chance)
+      if(genReal()<=chance) {
         g[i].emplace_back(j);
+        g[j].emplace_back(i);
+      }
     }
   }
 

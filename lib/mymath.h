@@ -48,6 +48,33 @@ void sieve() {
     }
 }
 
+namespace contsieve {
+  constexpr ll MAXN = 1e16;
+  constexpr ll PRIMES_CNT = 10000;
+
+  constexpr auto sieve() {
+    array<ll,PRIMES_CNT> primes = {};
+    ll sz = 0;
+    bitset<1001> isC;
+    for(ll i = 4; i*i <=MAXN; i+=2) {
+      isC[i]=true;
+    }
+    primes[sz++] = 2;
+
+    for(ll i = 3; i*i<=MAXN; i+=2)
+      if(isC[i])continue;
+      else {
+        primes[sz++] = i;
+        for(ll j = i*i; j*j<=MAXN; j+=2*i)
+          isC[j]=true;
+      }
+    return primes;
+  }
+
+  auto primes = sieve();
+}
+
+// Calculate factorial and its inverse
 void calcfato() {
   fat[0]=1;
   for(ll i = 1; i < MAXN; ++i) 
@@ -58,6 +85,8 @@ void calcfato() {
     inv[i]=(inv[i+1]*(i+1))%mod;
   }
 }
+
+// Calculate factorial with choose[i][j]
 ll MAXFAT;
 void calccfato() {
   fat[0]=1;
@@ -102,6 +131,7 @@ void calccfato() {
 
 }
 
+// "normalize" the factor of a number
 void reduce_div(ll &c, map<ll,ll> &fac, ll up, ll low) {
   vector<ll> toers;
   for(auto &[a,b]:fac) {
@@ -119,6 +149,7 @@ void reduce_div(ll &c, map<ll,ll> &fac, ll up, ll low) {
     fac.erase(ers);
 }
 
+// Template for modular arithmetic
 struct Mint {
   ll x=0;
   Mint() = default;

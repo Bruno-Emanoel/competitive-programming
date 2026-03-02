@@ -17,7 +17,7 @@ void find_bridges(ll u = 0, ll p = -1) {
     if(vis[w]) {
       low[u]= min(low[u],tin[w]);
     }else {
-      dfs(w,u);
+      find_bridges(w,u);
       low[u]=min(low[u],low[w]);
       if(low[w]>tin[u])
         bridges.emplace_back(u,w);
@@ -37,7 +37,7 @@ void find_articulation(ll u = 0, ll p = -1) {
     if(vis[w]) {
       low[u]= min(low[u],tin[w]);
     }else {
-      dfs(w,u);
+      find_articulation(w,u);
       low[u]=min(low[u],low[w]);
       if(low[w]>=tin[u]&&p!=-1)
         articulation.emplace_back(u);
@@ -75,4 +75,20 @@ vll FSPA(ll n, ll st = 0) {
     }
   }
   return dist;
+}
+
+// Shortest path without negative vertices O((n+m)logn)
+vll dijikstra(ll n, ll st = 0) {
+  vll dist(n,LLONG_MAX);
+  dist[st]=0;
+  priority_queue<pll> pq;
+  pq.emplace(0,st);
+  while(pq.size()) {
+    auto [w,now] = pq.top();pq.pop();
+    if(w<dist[now]) continue;
+    foreach(u,graph[now]) if(w+u.w<dist[u.to]) {
+      dist[u.to] = w+u.w;
+      pq.emplace(dist[u.to], u.to);
+    }
+  }
 }

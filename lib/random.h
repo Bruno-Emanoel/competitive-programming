@@ -4,9 +4,9 @@
 using namespace std;
 #endif
 
-mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
-
 const int RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
+
+mt19937 rng((uint32_t)chrono::steady_clock::now().time_since_epoch().count());
 
 int uniform(int l, int r) { return uniform_int_distribution<int>(l, r)(rng); }
 double genReal() { return uniform_real_distribution(0.0,1.0)(rng); }

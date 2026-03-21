@@ -3,21 +3,20 @@
 
 N=10 # Number of tests to run, you can change this value as needed
 
-file_name1="$1"
-file_name2="$2"
+file_name1="$1" # First command line argument, expected to be the first C++ file
+file_name2="$2" # Second command line argument, expected to be the second C++ file
 
 if [ -z "$file_name1" ] || [ -z "$file_name2" ]; then
     echo "Usage: $0 <code1.cpp> <code2.cpp>"
     exit 1
 fi
 
-g++ -std=c++20 -O2 gen.cpp -o gen.exe
+g++ -std=c++20 -O2 gen.cpp -o gen.exe # It's expected to have a gen.cpp as case generator to avoid biased results
 g++ -std=c++20 -O2 "$file_name1" -o code1.exe
 g++ -std=c++20 -O2 "$file_name2" -o code2.exe
 
 echo "Arquivos compilados"
 
-diffFound=0
 
 TIMEFORMAT=%R
 

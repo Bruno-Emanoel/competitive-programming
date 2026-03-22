@@ -11,7 +11,7 @@ if [ -z "$file_name1" ] || [ -z "$file_name2" ]; then
     exit 1
 fi
 
-g++ -std=c++20 -O2 gen.cpp -o gen.exe # It's expected to have a gen.cpp as case generator to avoid biased results
+g++ -std=c++20 -Ofast gen.cpp -o gen.exe # It's expected to have a gen.cpp as case generator to avoid biased results
 g++ -std=c++20 -O2 "$file_name1" -o code1.exe
 g++ -std=c++20 -O2 "$file_name2" -o code2.exe
 

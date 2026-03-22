@@ -36,3 +36,22 @@ class KMP {
     return count;
   }
 };
+
+// Calculate z(s), the Z-function of string s
+// z[i] = max { x : s[0..x-1] == s[i..i+x-1] }
+ll z[];
+void calcZ(string &s) {
+  ll n = s.size();
+  z[0] = 0;
+  ll l = 0, r = 1; // we keep [l, r), the latest interval that had a match (with largest r or largest size in case of draw)
+  for(ll i = 1; i < n; ++i) {
+    z[i] = (i < r)*min(r - i, z[i - l]); // if i < r, the partial value is known 
+    while(i + z[i] < n && s[z[i]] == s[i + z[i]]) // try matching
+      ++z[i];
+    if(i + z[i] > r) { // update last biggest interval with match
+      l = i;
+      r = i + z[i];
+    }
+  }
+  z[0] = n;
+}

@@ -1,3 +1,4 @@
+/*  CUSTOM_ADDONS.H   */
 
 struct customHash {
   static unsigned ll splitmix64(unsigned ll x) {
@@ -9,8 +10,9 @@ struct customHash {
 
   size_t operator()(unsigned ll x) const {
     static const unsigned ll FIXED_RANDOM =
-      chrono::steady_clock::now().time_since_epoch().count();
-    return splitmix64(x + FIXED_RANDOM);
+      chrono::steady_clock::now().time_since_epoch().count()
+      ^ (ull)(std::make_unique<char>().get());
+    return splitmix64(x ^ FIXED_RANDOM);
   }
 };
 

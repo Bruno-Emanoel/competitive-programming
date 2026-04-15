@@ -1,13 +1,4 @@
-#include <bits/stdc++.h>
-#include "mymath.h"
-using namespace std;
-#define ll long long
-#define ull unsigned ll
-#define v vector
-#define full(a) a.begin(), a.end()
-#define loop(i,s,n) for(ll i = s; i < n; ++i)
-#define getPot(i) ((1ULL)<<(i))
-
+/*  BITSET.H  */
 // Bitset used for subset sum optimization
 class BitSet {
   public:

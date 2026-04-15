@@ -1,19 +1,4 @@
-#ifndef MAXN
-constexpr long long MAXN = 10;
-#endif
-#ifndef ll
-#define ll long long
-#include <bits/stdc++.h>
-using namespace std;
-#endif
-#ifndef mod
-constexpr ll mod = 1e9+7;
-#endif
-#ifndef fat
-ll fat[MAXN];
-ll inv[MAXN];
-vector<ll> primes;
-#endif
+/*  mymath.h  */
 
 constexpr inline int lg(unsigned long i) {
   return __bit_width(i) - 1;

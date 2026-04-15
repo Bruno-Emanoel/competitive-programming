@@ -1,13 +1,10 @@
-#ifdef LOCAL
-#include <iostream>
-#include <string>
-#include <vector>
+/*  MYSTRINGS.H   */
 
-using namespace std;
-
-#define ll long long 
-#endif
-
+// KMP with automaton idea. When we think about the automaton to match a pattern p in some text t
+// we can think of an ndfa that process each character of t and count how many time the acceptance state is reached.
+// To optimize this, we can think about the leading active node at some point of the matching.
+// When a matching occur for this node, it simply advances, but when a mismatch occurs, we need the found the next active node
+// This can be done by keeping an array neighnor[0..N] such that it will say to which node we should ho back once a mismatch occurs.
 class KMP {
   public:
   size_t n;

@@ -1,6 +1,4 @@
-#ifndef sqrt 
-#include <math.h>
-#endif
+/*  GEO.H   */
 
 struct Vec2 {
   #define vec2 Vec2

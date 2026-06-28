@@ -1,12 +1,7 @@
 /*  HEAPS.H   */
 
+// Heap that suppor updates to elements in the middle via reference keeping
 namespace RefHeap {
-  #define ll long long
-  #define pll pair<ll,ll>
-  #define loop(i,s,n) for(ll i = s; i <n;++i)
-  #include <algorithm>
-  #include <vector>
-  using namespace std;
   constexpr ll MAXN = 1e4;
   ll n, hn;
   ll whe[MAXN];

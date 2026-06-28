@@ -55,7 +55,7 @@ ll subsetSum(v<ll> &vec, ll x, bool isSort=false) {
   loop(i,1,(ll)vec.size()) {
     if(vec[i]!=vec[las]) {
       ll x = i-las, j = 0;
-      if(x%vec[las]==0&&x/vec[las]<=x) // If only need one elm is needed and has right amount
+      if(x%vec[las]==0&&x/vec[las]<=x) // If only one elm is needed and has right amount
         return x;
       while(x>=getPot(j)) {
         x-=getPot(j);

@@ -50,6 +50,32 @@ class Seg {
   }
 };
 
+struct BIT {
+	ll n;
+	vll bit;
+
+	BIT(ll n): n(n), bit(n) {
+		loop(i,0,n)
+			bit[i] = 0;
+	}
+
+	node sum(ll r) {
+		node ret = 0;
+		for (; r >= 0; r = (r & (r + 1)) - 1)
+			ret = ret + bit[r];
+		return ret;
+	}
+
+	ll operator()(ll l, ll r) {
+		return sum(r).val - sum(l - 1).val;
+	}
+
+	void upd(ll idx) {
+		for (; idx < n; idx = idx | (idx + 1))
+			++bit[idx].val;
+	}
+};
+
 class SegProp {
   public:
   ll n, size;

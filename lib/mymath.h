@@ -1,9 +1,4 @@
 /*  mymath.h  */
-
-constexpr inline int lg(unsigned long i) {
-  return __bit_width(i) - 1;
-}
-
 inline ll binexpo(ll a, ll e) {
   ll ans = 1;
   a %=mod;
@@ -17,6 +12,28 @@ inline ll binexpo(ll a, ll e) {
   return ans;
 }
 
+ll extgcd(ll a, ll b, ll &x, ll &y) {
+  if(b==0) {
+    x = 1, y = 0;
+    return a;
+  }
+  ll g = extgcd(b,a%b,y,x);
+  y -= a/b*x;
+  return g;
+}
+
+ll itgcd(ll a, ll b, ll &x, ll &y) {
+	ll px = 0, py = 1, p = b, g = a;
+	x = 1, y = 0;
+	while(p) {
+		x-=px*(g/p), y-=py*(g/p);
+		swap(x,px); swap(y,py);
+		g = p, p = a*px + b*py;
+	}
+	return g;
+}
+
+vll primes;
 void sieve() {
   primes.reserve(MAXN/10);
   vector<bool> isC(MAXN+1);
@@ -34,7 +51,7 @@ void sieve() {
 }
 
 namespace contsieve {
-  constexpr ll MAXN = 1e16;
+  constexpr ll MAXN = 1e6;
   constexpr ll PRIMES_CNT = 10000;
 
   constexpr auto sieve() {
@@ -59,6 +76,7 @@ namespace contsieve {
   auto primes = sieve();
 }
 
+ll fat[], inv[], mod;
 // Calculate factorial and its inverse
 void calcfato() {
   fat[0]=1;
@@ -151,4 +169,36 @@ struct Mint {
   Mint &operator*=(const Mint &a) { return *this = operator*(a); }
   Mint &operator/=(const Mint &a) { return *this = operator/(a); }
   Mint &operator^=(const Mint &a) { return *this = operator^(a); }
+};
+
+namespace XorBasis {
+  constexpr ll LOGN = 20;
+  using Vec = unsigned;
+  using Basis = array<Vec,LOGN>;
+  
+  inline void insert(Basis &a, Vec vec) { // O(logn)
+    if(!vec)
+      return;
+    loop(i,0,LOGN) {
+      if(!getBit(vec,i)) continue;
+      if(!getBit(a[i],i)) {
+        a[i] = vec;
+        return;
+      }
+      vec^=a[i];
+    }
+  }
+  inline bool contains(const Basis&a,Vec vec) { // O(logn)
+    loop(i,0,LOGN) {
+      if(!getBit(vec,i)) continue;
+      if(!getBit(a[i],i))
+        return false;
+      vec^=a[i];
+    }
+    return vec==0;
+  }
+  inline void operator+=(Basis&a, const Basis&b) { // O(log^2(n))
+    loop(i,0,LOGN)
+      insert(a,b[i]);
+  } 
 };

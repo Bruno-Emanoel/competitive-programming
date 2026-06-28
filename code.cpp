@@ -1,37 +1,27 @@
 /*  CODE.CPP  */
 #include <bits/stdc++.h>
 using namespace std;
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
+//#pragma GCC optimize("O3,unroll-loops")
+//#pragma GCC target("avx2")
 
-#define double long double
-#define ll long long 
-#define pll pair<ll,ll>
-#define vll vector<ll>
-#define vpll vector<pll>
-#define v vector
+using ldouble = long double;
+using ll = long long int;
+using ull = unsigned long long int;
+using pll = pair<ll,ll>;
+using vll = vector<ll>;
+using vpll = vector<pll>;
+template <typename T>
+using v = vector<T>;
 
 #define loop(i,s,n) for(ll i = s; i < (ll)n; ++i)
 #define downto(i,s,n) for(ll i = s; i >= (ll)n; --i)
 #define foreach(i,v) for(auto &i:v)
 
 #define full(a) a.begin(), a.end()
-#define getBit(x,i) ((1LL<<i)&(x))
-#define ispot2(x) ((1LL<<lg(x))==(x))
-#define getPot(x)  ((1ULL)<<(x))
-#define getMsb(x) getPot(lg(x))
 
-#define INF LLONG_MAX
-#define NINF LLONG_MIN
-#define PI acos(-1)
-
-// template <typename T = ll, typename Cmp = greater_equal<ll>>
-// using ordered_multiset = __gnu_pbds::tree<T, __gnu_pbds::null_type, Cmp, __gnu_pbds::rb_tree_tag, __gnu_pbds::tree_order_statistics_node_update>;
-
-//typedef gp_hash_table<ll, ll, hash<ll>, equal_to<ll>, direct_mod_range_hashing<ll>, linear_probe_fn<>,
-//                      hash_standard_resize_policy<hash_prime_size_policy, hash_load_check_resize_trigger<true>, true>>
-//    hashT;
-
+constexpr ll INF = LLONG_MAX;
+constexpr ll NINF = LLONG_MIN;
+//constexpr ldouble PI  = numbers::pi;
 
 #ifdef LOCAL
 #include "debug/debug.h"
@@ -39,15 +29,18 @@ using namespace std;
 #define debug(...) {}
 #endif
 
-constexpr unsigned ll lg(ll x) {
-  return __bit_width(x)-1;
-}
+constexpr inline unsigned lg(ull x)     { return __bit_width(x)-1; }
+constexpr inline ll getBit(ll x, ll i)  { return (1LL<<i) & x; }
+constexpr inline ll ispot2(ll x)        { return (1LL<<lg(x)) == x; }
+constexpr inline ll getPot(ll x)        { return 1ULL<<x; }
+constexpr inline ll getMsb(ll x)        { return getPot(lg(x)); }
+
+constexpr inline pll mkpll(ll a, ll b) { return make_pair(a,b); }
 
 // READING
 inline void getall(vll &a) { for(auto&i:a)cin>>i;}
 inline void getall(vpll &a) { for(auto&i:a)cin>>i.first>>i.second;}
 inline void getalt(vpll &a) { for(auto&i:a)cin>>i.first;for(auto&i:a)cin>>i.second;}
-
 // PRINTING
 template <typename T>
 void print(const v<T> &vec, char sep = ' ') {

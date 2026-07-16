@@ -24,10 +24,12 @@ class Seg {
   }
   ...
 }
+Seg segs[MAXN];
 */
 
 namespace HLD {
 ll pos[MAXN], head[MAXN], heavy[MAXN], val[MAXN], conv[MAXN];
+
 
 ll dfs(ll u = 0, ll p = 0) {
   ll sz = 1, msz = 0; heavy[u] = -1;
@@ -48,8 +50,42 @@ void compose(ll u, ll w, ll p = -1) {
   head[u] = w, pos[u] = now++, conv[pos[u]] = val[u];
   if(heavy[u]!=-1)
   compose(heavy[u],w,u);
+  else
+  segs[w] = Seg(pos[u]-pos[w]+1,conv+pos[w]);
   foreach(x,t[u]) if(x!=p&&x!=heavy[u])
   compose(x,x,u);
+}
+
+// LCA em O(logn) com HLD
+// Sobe os caminhos pesados até que ambos estejam no mesmo caminho pesado
+// Sobe o que está mais fundo de cada vez
+ll lca(ll u, ll w) {
+  while(head[u]!=head[w]) {
+    if(depth[u]<depth[w])
+      swap(u,w);
+    u = par[head[u]];
+  }
+  return depth[u]<depth[w] ? u : w;
+}
+
+void updup(ll u, ll v, bool inclusive = true) {
+  while(head[u]!=head[v])
+    segs[head[u]].upd(0,pos[u]-pos[head[u]]), u = par[head[u]];
+  if(inclusive) {
+    if(u!=v)
+      segs[head[u]].upd(pos[v]-pos[head[v]]+1,pos[u]-pos[head[u]]);
+  }else
+    segs[head[u]].upd(pos[v]-pos[head[v]],pos[u]-pos[head[u]]);
+} 
+
+void upd(ll u, ll v) {
+  if(depth[u]<depth[v])
+    swap(u,v);
+  ll lc = lca(u,v);
+  if(lc==v)
+    return updup(u,v);
+  updup(u,lc);
+  updup(v,lc,false);
 }
 }
 
